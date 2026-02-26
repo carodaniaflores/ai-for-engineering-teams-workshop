@@ -4,6 +4,12 @@ This is the workshop repository for **AI for Engineering Teams: Practical Tools 
 
 ## Getting Started
 
+### Prerequisites
+1. [Docker Desktop](https://www.docker.com) 
+2. [Visual Studio Code](https://code.visualstudio.com)
+   - [Dev Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+4. [Claude Code](https://claude.ai)
+
 ### Using VS Code Dev Containers (Recommended)
 
 1. Open this repository in VS Code
