@@ -1,6 +1,8 @@
 'use client';
 
 import { Suspense } from 'react';
+import MarketIntelligenceWidget from '../components/MarketIntelligenceWidget';
+import HealthIndicator from '../components/HealthIndicator';
 
 // Dynamic component imports with error boundaries
 const CustomerCardDemo = () => {
@@ -9,13 +11,14 @@ const CustomerCardDemo = () => {
     const CustomerCard = require('../components/CustomerCard')?.default;
     const mockCustomers = require('../data/mock-customers')?.mockCustomers;
     
-    if (CustomerCard && mockCustomers?.[0]) {
+    if (CustomerCard && mockCustomers?.length > 0) {
       return (
         <div className="space-y-4">
           <p className="text-green-600 text-sm font-medium">✅ CustomerCard implemented!</p>
-          <div className="flex flex-wrap gap-4">
-            <CustomerCard customer={mockCustomers[0]} />
-            <CustomerCard customer={mockCustomers[1]} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {mockCustomers.map((customer: { id: string }) => (
+              <CustomerCard key={customer.id} customer={customer} />
+            ))}
           </div>
         </div>
       );
@@ -80,8 +83,15 @@ export default function Home() {
         <section className="bg-white rounded-lg shadow p-6">
           <h3 className="text-lg font-semibold mb-4">Dashboard Widgets</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <DashboardWidgetDemo widgetName="Domain Health Widget" exerciseNumber={5} />
-            <DashboardWidgetDemo widgetName="Market Intelligence" exerciseNumber={6} />
+            <div className="rounded-lg border bg-white p-4 shadow-sm">
+              <h3 className="text-base font-semibold text-gray-900 mb-3">Health Score</h3>
+              <div className="space-y-3">
+                {[15, 45, 85].map((score) => (
+                  <HealthIndicator key={score} score={score} />
+                ))}
+              </div>
+            </div>
+            <MarketIntelligenceWidget />
             <DashboardWidgetDemo widgetName="Predictive Alerts" exerciseNumber={8} />
           </div>
         </section>
